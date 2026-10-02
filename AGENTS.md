@@ -1,0 +1,21 @@
+# App
+- This repo (`@polyhymnia/app`) is the ear-training product SPA: Vite + React 19 + TypeScript, Tailwind CSS v4 (`@tailwindcss/vite`, CSS-first, no `tailwind.config.js`), shadcn/ui, TanStack Router (file-based, `routeTree.gen.ts` committed).
+- shadcn components live in `src/components/ui`, generated via the shadcn CLI, not hand-written.
+- Class merging uses the npm `cn` package, never `clsx`/`tailwind-merge`. `src/lib/utils.ts` builds one configured `cn` via `createCn` from `cn/config`, extending `theme.text` with the semantic type scale; import `cn` from `@/lib/utils` everywhere, never straight from `"cn"`. Without that config `cn` reads custom `text-*` size tokens (`text-meta`, `text-title`, …) as text *colors* and silently deletes a co-occurring `text-*-foreground`, so `cn`'s type scale must stay in sync with the `--text-*` tokens in `styles/theme.css` (`test/cn-type-scale.test.ts` guards this).
+- Colors: Catppuccin (Latte light, Mocha dark), primary = pink. `primary` is for fills (exact Latte/Mocha pink); pink text, links, rings and notation highlights use `primary-strong` (AA-safe on light backgrounds). Scales in `src/styles/palette.css`, semantic shadcn tokens + notation `--pn-*` mapping in `src/styles/theme.css`. Use semantic tokens or palette scales, never raw color values. Never pure black or white (`white`/`black` are remapped to Latte base / Mocha crust).
+
+# Packages
+- Notation, theory and sound come from the published `@polyhymnia/*` packages (github.com/adrian729/notation, music-theory, web-audio), imported only through their public exports; never copy package code here. Fix package bugs in their repos.
+- Local package development: clone those repos next to this one (or set `POLYHYMNIA_SRC`) and run `pnpm dev:link`; `pnpm dev:unlink` before committing.
+- MNX is the only score format; app-private helpers that return plain MNX (`mnxBuild`) are allowed. Quiz data about notes lives in the app, keyed by MNX note id, never in the document.
+- The app owns time: notation never runs clocks; the app drives `setPlaybackTick` from `@polyhymnia/web-audio` playback and mnx-score `performance()`.
+- Pitch, interval, chord, scale and key logic comes only from `@polyhymnia/music-theory`.
+- Render check: committed `.mnx.json` scores must lay out with `layoutScore` without errors or unexpected `mnx-unsupported` (`test/scores-render.test.ts`).
+- Third-party audio libs or samples only behind the `Instrument` seam, pinned; ask before installing.
+
+# Tests
+- Add a test only to prevent a real regression: a contract or a bug that was actually fixed. Otherwise don't.
+- New behavior → at most a few tests for its distinct branches. Never one test per constant, option, or trivial mapping; never restate the implementation.
+- Fixed bug → one regression test that fails without the fix. Table-driven over copy-paste; no cross-products.
+- Test only through public entry points; never export internals for tests. Never weaken an assertion to go green.
+- Agents: run tests with `--reporter=dot`.
