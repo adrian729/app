@@ -6,12 +6,12 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/adrian729/app/actions/workflows/pages.yml"><img alt="Deploy status" src="https://github.com/adrian729/app/actions/workflows/pages.yml/badge.svg"></a>
+  <a href="https://github.com/adrian729/polyhymnia-ear-training/actions/workflows/pages.yml"><img alt="Deploy status" src="https://github.com/adrian729/polyhymnia-ear-training/actions/workflows/pages.yml/badge.svg"></a>
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-ea76cb">
 </p>
 
 <p align="center">
-  <a href="https://adrian729.github.io/app/"><b>Open the app</b></a>
+  <a href="https://adrian729.github.io/polyhymnia-ear-training/"><b>Open the app</b></a>
 </p>
 
 Polyhymnia trains the part of musicianship that reading notation alone does not: hearing what is written. Short exercises play real scores and ask you to name, place or correct what you heard — no abstract interval buttons, no MIDI. Notation, theory and sound come from the [`@polyhymnia/*` packages](https://github.com/adrian729/notation).

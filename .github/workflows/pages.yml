@@ -1,4 +1,4 @@
-name: Deploy app to GitHub Pages
+name: Deploy Polyhymnia Ear Training to GitHub Pages
 
 on:
   push:

@@ -131,8 +131,8 @@ Mechanical. A change touching any of these is not done.
 
 ## Definition of done
 
-1. `pnpm --filter @polyhymnia/app typecheck` passes.
-2. `pnpm --filter @polyhymnia/app test` passes.
+1. `pnpm typecheck` passes.
+2. `pnpm test` passes.
 3. Every changed file uses semantic tokens only — grep the diff for `text-(teal|pink|blue|neutral|red|green|peach|yellow|lavender|mauve|white|black)-`, `bg-` equivalents, `#`, and `rgb(`.
 4. Every interactive element has hover, focus-visible, active and disabled states.
 5. Focus rings are visible and meet WCAG 2.2 AA.
